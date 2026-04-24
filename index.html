@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a2d4a">
+<title>Yusuke's London Kit 〜ロンドンで頑張るキミへ〜</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  :root {
+    --bg: #f5efe0;
+    --card: #faf6ea;
+    --ink: #1a2d4a;
+    --ink-soft: #4a5a75;
+    --accent: #c9302c;
+    --gold: #b8860b;
+    --sakura: #f4c4c4;
+    --border: rgba(26,45,74,0.15);
+    --shadow: rgba(0,0,0,0.12);
+  }
+  body {
+    font-family: "Hiragino Sans", "Yu Gothic", -apple-system, "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+
+  /* ===== ヒーロー ===== */
+  .hero {
+    position: relative;
+    padding: 60px 16px 70px;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(180deg, #2a3d5c 0%, #4a5a75 45%, #c4896b 75%, #f4c4a8 100%);
+    color: #faf6ea;
+  }
+  /* ビッグベンのシルエット */
+  .skyline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    opacity: 0.35;
+  }
+  /* 舞う桜 */
+  .petal {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: var(--sakura);
+    border-radius: 100% 0 100% 0;
+    opacity: 0.8;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-50px) translateX(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.8; }
+    100% { transform: translateY(120vh) translateX(80px) rotate(720deg); opacity: 0; }
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .kit-title {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .kit-sub {
+    font-size: 14px;
+    letter-spacing: 4px;
+    opacity: 0.95;
+    margin-bottom: 28px;
+  }
+  .owner-name {
+    display: inline-block;
+    font-size: 15px;
+    background: rgba(250,246,234,0.2);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 10px 24px;
+    border-radius: 24px;
+    letter-spacing: 3px;
+    border: 1px solid rgba(250,246,234,0.4);
+  }
+  .owner-name .dear { font-size: 11px; opacity: 0.8; margin-right: 8px; letter-spacing: 2px; }
+
+  .hero-footer {
+    position: relative;
+    z-index: 2;
+    margin-top: 34px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    letter-spacing: 1px;
+    opacity: 0.9;
+  }
+  .hero-footer span { display: flex; align-items: center; gap: 6px; }
+
+  /* ===== 導入テキスト ===== */
+  .intro {
+    padding: 50px 20px 30px;
+    text-align: center;
+  }
+  .intro-jp {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 2;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    margin-bottom: 12px;
+  }
+  .intro-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 24px auto;
+  }
+  .intro-tag {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 3px;
+  }
+
+  /* ===== 3カード ===== */
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px 0 40px;
+  }
+  .card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    padding: 28px 22px;
+    box-shadow: 0 4px 20px var(--shadow);
+    text-decoration: none;
+    color: var(--ink);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: block;
+  }
+  .card:active { transform: scale(0.98); }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px var(--shadow); }
+
+  .card-ribbon {
+    position: absolute;
+    top: 0; right: 0;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 6px 14px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    border-radius: 0 18px 0 14px;
+  }
+  .card-time {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .card-emoji {
+    font-size: 46px;
+    display: block;
+    margin: 4px 0 14px;
+  }
+  .card-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .card-sub {
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+  }
+  .card-desc {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.8;
+    margin-bottom: 18px;
+  }
+  .card-go {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--gold);
+  }
+  .card-go::after {
+    content: '→';
+    transition: transform 0.2s;
+  }
+  .card:hover .card-go::after { transform: translateX(4px); }
+
+  /* 色アクセント */
+  .card-morning { border-top: 3px solid #f4a66b; }
+  .card-noon    { border-top: 3px solid #b8860b; }
+  .card-night   { border-top: 3px solid #4a5a75; }
+
+  /* ===== YoshiBonからの手紙 ===== */
+  .letter-section {
+    margin: 40px 0;
+    padding: 30px 24px;
+    background: var(--card);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .letter-stamp {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transform: rotate(-12deg);
+    background: rgba(250,246,234,0.7);
+  }
+  .letter-head {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+  }
+  .letter-body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    font-size: 14px;
+    line-height: 2.2;
+    color: var(--ink);
+    white-space: pre-wrap;
+    margin-bottom: 20px;
+  }
+  .letter-sign {
+    text-align: right;
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 2px;
+  }
+
+  /* ===== 使い方 ===== */
+  .howto {
+    padding: 30px 24px;
+    background: rgba(184,134,11,0.06);
+    border-radius: 16px;
+    margin: 20px 0 40px;
+    border-left: 3px solid var(--gold);
+  }
+  .howto-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+  }
+  .howto-item {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.9;
+    padding: 4px 0;
+  }
+  .howto-num {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    background: var(--gold);
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    margin-right: 8px;
+    font-weight: 600;
+  }
+
+  /* ===== フッター ===== */
+  footer {
+    text-align: center;
+    padding: 40px 20px 50px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+  .motto {
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: var(--ink);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .from {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+  .heart {
+    display: inline-block;
+    animation: beat 1.8s ease-in-out infinite;
+    color: var(--accent);
+    margin: 0 4px;
+  }
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+  }
+
+  @media (max-width: 480px) {
+    .kit-title { font-size: 28px; letter-spacing: 2px; }
+    .kit-sub { font-size: 12px; letter-spacing: 3px; }
+    .intro-jp { font-size: 15px; }
+    .card-title { font-size: 19px; }
+    .card-emoji { font-size: 40px; }
+    .letter-body { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== ヒーロー ===== -->
+<section class="hero">
+  <!-- 舞う桜 -->
+  <div class="petal" style="left:5%;  animation-duration:12s; animation-delay:0s;"></div>
+  <div class="petal" style="left:18%; animation-duration:15s; animation-delay:2s;"></div>
+  <div class="petal" style="left:32%; animation-duration:10s; animation-delay:4s;"></div>
+  <div class="petal" style="left:48%; animation-duration:14s; animation-delay:1s;"></div>
+  <div class="petal" style="left:62%; animation-duration:11s; animation-delay:6s;"></div>
+  <div class="petal" style="left:78%; animation-duration:13s; animation-delay:3s;"></div>
+  <div class="petal" style="left:90%; animation-duration:16s; animation-delay:5s;"></div>
+
+  <div class="hero-content">
+    <h1 class="kit-title">Yusuke's London Kit</h1>
+    <p class="kit-sub">ロンドンで頑張るキミへ</p>
+    <div class="owner-name"><span class="dear">DEAR</span>裕介</div>
+
+    <div class="hero-footer">
+      <span>🇬🇧 London <span id="londonTime">--:--</span></span>
+      <span>🇯🇵 東京 <span id="tokyoTime">--:--</span></span>
+      <span>✈️ 9,558 km</span>
+    </div>
+  </div>
+
+  <!-- スカイライン -->
+  <svg class="skyline" viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <path d="M0,120 L0,85 L60,85 L60,70 L110,70 L110,85 L180,85 L180,55 L200,55 L200,40 L210,40 L210,25 L215,25 L215,10 L220,10 L220,25 L225,25 L225,40 L235,40 L235,55 L255,55 L255,85 L320,85 L320,65 L380,65 L380,75 L440,75 L440,50 L450,50 L450,35 L455,30 L460,35 L460,50 L470,50 L470,75 L540,75 L540,60 L620,60 L620,80 L700,80 L700,55 L720,55 L720,35 L740,35 L740,15 L750,15 L750,5 L760,5 L760,15 L770,15 L770,35 L790,35 L790,55 L810,55 L810,80 L880,80 L880,65 L950,65 L950,85 L1020,85 L1020,70 L1080,70 L1080,55 L1130,55 L1130,85 L1200,85 L1200,120 Z" fill="#1a2d4a"/>
+  </svg>
+</section>
+
+<div class="wrap">
+
+  <!-- ===== 導入 ===== -->
+  <section class="intro">
+    <p class="intro-jp">
+      日本から 9,558キロ。<br>
+      ケンジントンの厨房で、キミは今日も戦っている。<br>
+      この3つのアプリは、日本からの小さな贈り物。<br>
+      朝・昼・夜、それぞれの時間にそっと寄り添うよ。
+    </p>
+    <div class="intro-divider"></div>
+    <p class="intro-tag">── A GIFT FROM JAPAN ──</p>
+  </section>
+
+  <!-- ===== 3カード ===== -->
+  <section class="cards">
+
+    <a class="card card-morning" href="https://spc-jp.github.io/yusuke-mikke/" target="_blank" rel="noopener">
+      <span class="card-ribbon">朝ひらく</span>
+      <p class="card-time">MORNING</p>
+      <span class="card-emoji">🌅</span>
+      <h2 class="card-title">裕介みっけ</h2>
+      <p class="card-sub">今日の一言、日本から</p>
+      <p class="card-desc">
+        起きたら、封筒を開けてみて。<br>
+        YoshiBonからの言葉、日本の俳句、家族からのひと言が、<br>
+        今日のキミに届くよ。
+      </p>
+      <span class="card-go">アプリを開く</span>
+    </a>
+
+    <a class="card card-noon" href="https://spc-jp.github.io/akira-english/" target="_blank" rel="noopener">
+      <span class="card-ribbon">昼つかう</span>
+      <p class="card-time">NOON</p>
+      <span class="card-emoji">🍱</span>
+      <h2 class="card-title">AKIRA Omotenashi English</h2>
+      <p class="card-sub">ポケットの中の接客英語</p>
+      <p class="card-desc">
+        お客様に説明したい一言を、片手でサッと。<br>
+        和牛、寿司、おまかせ、文化の話まで、<br>
+        AKIRAで本当に使える120フレーズ。
+      </p>
+      <span class="card-go">アプリを開く</span>
+    </a>
+
+    <a class="card card-night" href="https://spc-jp.github.io/london-notebook/" target="_blank" rel="noopener">
+      <span class="card-ribbon">夜かく</span>
+      <p class="card-time">NIGHT</p>
+      <span class="card-emoji">🌙</span>
+      <h2 class="card-title">ロンドン気づきノート</h2>
+      <p class="card-sub">キミの成長を、キミの手で</p>
+      <p class="card-desc">
+        一日の終わりに、3行だけ。<br>
+        出来事、気づき、明日への一言。<br>
+        積み重なる日々が、いつか宝物になる。
+      </p>
+      <span class="card-go">アプリを開く</span>
+    </a>
+
+  </section>
+
+  <!-- ===== YoshiBonからの手紙 ===== -->
+  <section class="letter-section">
+    <div class="letter-stamp">JAPAN</div>
+    <p class="letter-head">── 裕介へ ──</p>
+    <div class="letter-body">ハウスメーカーを辞めて、ロンドンへ渡る。
+その決断をしたキミを、僕は本当に誇りに思っているよ。
+
+異国の厨房は、うまくいかない日もあるよね。
+英語が出てこない日も、ホームシックになる日も、
+お客様の一言に救われる日も、きっと全部ある。
+
+その全部を、この3つのアプリが
+そっと記録して、そっと支えてくれる。
+
+無理はしないで。
+でも、キミならきっと、大丈夫。
+日本からずっと、応援してるからね。</div>
+    <p class="letter-sign">— YoshiBon より</p>
+  </section>
+
+  <!-- ===== 使い方 ===== -->
+  <section class="howto">
+    <p class="howto-title">💡 ホーム画面に追加して、いつでも開こう</p>
+    <p class="howto-item"><span class="howto-num">1</span>各アプリを開く</p>
+    <p class="howto-item"><span class="howto-num">2</span>iPhone：共有ボタン → 「ホーム画面に追加」</p>
+    <p class="howto-item"><span class="howto-num">3</span>Android：メニュー → 「ホーム画面に追加」</p>
+    <p class="howto-item"><span class="howto-num">4</span>これで3つのアプリがホーム画面から一発起動できるよ</p>
+  </section>
+
+</div>
+
+<!-- ===== フッター ===== -->
+<footer>
+  <p class="motto">考えるを、ひとりにしない。</p>
+  <p class="from">with<span class="heart">♥</span>from YoshiBon, Japan</p>
+</footer>
+
+<script>
+// ロンドンと東京の時刻をリアルタイム表示
+function updateClocks() {
+  const now = new Date();
+  const opts = { hour: '2-digit', minute: '2-digit', hour12: false };
+  const londonFmt = new Intl.DateTimeFormat('en-GB', { ...opts, timeZone: 'Europe/London' });
+  const tokyoFmt  = new Intl.DateTimeFormat('ja-JP', { ...opts, timeZone: 'Asia/Tokyo' });
+  document.getElementById('londonTime').textContent = londonFmt.format(now);
+  document.getElementById('tokyoTime').textContent  = tokyoFmt.format(now);
+}
+updateClocks();
+setInterval(updateClocks, 30000);
+</script>
+
+</body>
+</html>
